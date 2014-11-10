@@ -1,12 +1,13 @@
 require 'rails_helper'
 
 describe 'posts' do
+
 	context 'no posts have been added' do
 		it 'should display a prompt to add a post' do
 			visit '/posts'
 			expect(page).to have_content 'No posts'
 			expect(page).to have_link 'Add a post'
-		end
+		end	
 	end
 end
 
@@ -30,6 +31,23 @@ context 'posts have been added' do
 end
 
 describe 'creating posts' do
+
+	before do
+		visit '/'
+		click_link('Sign up')
+		fill_in('Email', with: 'test@tes.com')
+		fill_in('Password', with: 'testtest')
+		fill_in('Password confirmation', with: 'testtest')
+		click_button('Sign up')
+	end
+
+	it "Should only allow logged in users to post images" do
+		visit '/'
+		click_link 'Add a post'
+		expect(page).to have_content 'Add a photo:'
+	end
+
+
 	it 'prompts user to fill out a form, then displays the new post' do
 		visit '/posts'
 		click_link 'Add a post'
@@ -40,6 +58,15 @@ describe 'creating posts' do
 		expect(page).to have_css("img[alt=Test]")
 		expect(current_path).to eq '/posts'
 	end
+
+	it " should not allow users that are not logged in to post images" do
+		visit '/'
+		click_link 'Sign out'
+		click_link 'Add a post'
+		expect(page).to have_content 'Log in'
+	end
+
+
 end
 
 context 'viewing posts' do
