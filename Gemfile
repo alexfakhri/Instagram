@@ -44,4 +44,5 @@ gem 'capybara', group: :test
 gem 'launchy', group: :test
 
 gem 'paperclip'
+gem 'devise'
 
