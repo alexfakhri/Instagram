@@ -26,7 +26,6 @@ context 'posts have been added' do
 
 	it 'Should display the post photos' do
 		visit '/posts'
-		save_and_open_page
 		expect(page).to have_css("img[alt=Test]")
 		
 	end
@@ -38,9 +37,11 @@ describe 'creating posts' do
 		visit '/posts'
 		click_link 'Add a post'
 		fill_in 'Title', with: 'Title'
-		
+		attach_file "Image", "#{Rails.root}/public/images/full-size/test.png"
 		click_button 'Create Post'
 		expect(page).to have_content 'Title'
+		expect(page).to have_css("img[alt=Test]")
+		save_and_open_page
 		expect(current_path).to eq '/posts'
 	end
 end
