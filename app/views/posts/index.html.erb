@@ -1,11 +1,14 @@
+
+
+
 <% if @posts.any? %>
 	<% @posts.each do |post| %>
 		<h2><%= link_to "#{post.title}", post_path(post) %></h2>
 		<%= link_to (image_tag post.image.url(:thumb)), post_path(post), id: "img-#{post.id}" %>
+		<%= link_to "Delete Post", post_path(post), method: :delete %>
 	<% end %>
 	<% else %>
 	No posts yet!
 	<% end %>
 
 
-<a href='posts/new'>Add a post</a>

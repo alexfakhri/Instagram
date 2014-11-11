@@ -92,7 +92,25 @@ context 'viewing posts' do
 
 end
 	
+describe 'deleting posts' do
 
+  before do
+    Post.create(title: 'Title', image: File.open("#{Rails.root}/public/images/full-size/test.png"))
+    visit '/'
+		click_link('Sign up')
+		fill_in('Email', with: 'test@tes.com')
+		fill_in('Password', with: 'testtest')
+		fill_in('Password confirmation', with: 'testtest')
+		click_button('Sign up')
+  end
+
+  it "removes a restaurant when a user clicks a delete link" do
+    visit '/posts'
+    click_link 'Delete Post'
+    expect(page).not_to have_content 'Title'
+    expect(page).to have_content 'Post deleted successfully'
+  end
+end
 
 
 

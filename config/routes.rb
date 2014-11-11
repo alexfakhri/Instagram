@@ -55,7 +55,12 @@ Rails.application.routes.draw do
   #     resources :products
   #   end
 
-  resources :posts
+  resources :posts, shallow: true do
+    resources :comments
+      resources :likes
+    end
+  
+  
 
   root to: "posts#index"
 end

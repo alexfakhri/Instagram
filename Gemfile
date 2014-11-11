@@ -45,4 +45,7 @@ gem 'launchy', group: :test
 
 gem 'paperclip'
 gem 'devise'
+gem 'poltergeist', group: :test
+gem 'database_cleaner', group: :test
 
+gem "twitter-bootstrap-rails"
