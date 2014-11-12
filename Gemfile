@@ -48,4 +48,4 @@ gem 'devise'
 gem 'poltergeist', group: :test
 gem 'database_cleaner', group: :test
 
-gem "twitter-bootstrap-rails"
+gem 'foundation-rails'
